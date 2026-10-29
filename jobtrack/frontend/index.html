@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JobTrack</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- ========== LOGIN / REGISTER (shown when no token is stored) ========== -->
+  <section id="auth" class="auth" hidden>
+    <form id="authForm" class="authcard">
+      <h1>Job<span>Track</span></h1>
+
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="username" required>
+
+      <label for="password">Password (min 6 characters)</label>
+      <input id="password" type="password" autocomplete="current-password" minlength="6" required>
+
+      <p id="authMsg" class="error" role="alert"></p>
+
+      <div class="actions">
+        <button type="button" id="registerBtn" class="btn">Register</button>
+        <button type="submit" class="btn primary">Log in</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ========== MAIN APP (shown when logged in) ========== -->
+  <div id="app" hidden>
+
+    <aside class="sidebar">
+      <h1>Job<span>Track</span></h1>
+      <p>Application tracker</p>
+    </aside>
+
+    <main>
+      <header class="top">
+        <h2>Dashboard</h2>
+        <div>
+          <button type="button" id="logoutBtn" class="btn">Log out</button>
+          <button type="button" id="addBtn" class="btn primary">+ Add application</button>
+        </div>
+      </header>
+
+      <!-- Success / error messages -->
+      <div id="message" role="status" aria-live="polite"></div>
+
+      <!-- Summary cards (filled by main.js) -->
+      <section id="stats" class="stats"></section>
+
+      <!-- Search, filters, sorting -->
+      <section class="filters">
+        <label>Search
+          <input id="q" type="search" placeholder="Company or job title">
+        </label>
+        <label>Status
+          <select id="fStatus"><option value="">All</option></select>
+        </label>
+        <label>Type
+          <select id="fType"><option value="">All</option></select>
+        </label>
+        <label>Sort
+          <select id="fSort">
+            <option value="desc">Newest first</option>
+            <option value="asc">Oldest first</option>
+          </select>
+        </label>
+      </section>
+
+      <!-- Applications table / cards and pagination (filled by main.js) -->
+      <div id="loading" hidden>Loading…</div>
+      <section id="list" class="list"></section>
+      <div id="pager" class="pager"></div>
+    </main>
+
+  </div>
+
+  <!-- ========== ADD / EDIT DIALOG ========== -->
+  <dialog id="dlg">
+    <form id="form" novalidate>
+      <h3 id="dlgTitle">Add application</h3>
+
+      <label for="companyName">Company *</label>
+      <input id="companyName" name="companyName" maxlength="100">
+
+      <label for="jobTitle">Job title *</label>
+      <input id="jobTitle" name="jobTitle" maxlength="100">
+
+      <label for="jobType">Job type *</label>
+      <select id="jobType" name="jobType"></select>
+
+      <label for="location">Location *</label>
+      <input id="location" name="location" maxlength="100">
+
+      <label for="applicationDate">Application date *</label>
+      <input id="applicationDate" name="applicationDate" type="date">
+
+      <label for="status">Status *</label>
+      <select id="status" name="status"></select>
+
+      <label for="followUpDate">Follow-up date</label>
+      <input id="followUpDate" name="followUpDate" type="date">
+
+      <label for="jobUrl">Job URL</label>
+      <input id="jobUrl" name="jobUrl" type="url" maxlength="500">
+
+      <label for="notes">Notes</label>
+      <textarea id="notes" name="notes" rows="3" maxlength="1000"></textarea>
+
+      <p id="history" class="hint"></p>
+      <p id="formError" class="error" role="alert"></p>
+
+      <div class="actions">
+        <button type="button" id="cancelBtn" class="btn">Cancel</button>
+        <button type="submit" class="btn primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>
